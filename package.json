@@ -8,8 +8,9 @@
     "node": ">=6.2.2"
   },
   "scripts": {
-    "start": "npm install && gulp build && node bin/app.js",
-    "dev": "npm install && gulp dev"
+    "start": "node bin/app.js",
+    "dev": "npm install && gulp dev",
+    "postinstall": "gulp build"
   },
   "keywords": [
     "slack",
