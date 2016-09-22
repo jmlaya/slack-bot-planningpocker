@@ -1,0 +1,9 @@
+{
+    "path": "{{# process.env.SB_PP_LOG_DIR || process.cwd() + '/logs' }}",
+    "days_history": 90,
+    "compress_history": true,
+    "filenames":{
+        "errors": "errors",
+        "traffic": "traffic"
+    }
+}
