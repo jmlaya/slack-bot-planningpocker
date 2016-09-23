@@ -2,7 +2,7 @@ import JsonDB from 'node-json-db';
 import slackResponse from 'lib/slack-response';
 import config from 'loaders/config';
 
-const db = new JsonDB(config.env.dbName, true, false);
+const db = new JsonDB(config.env.db_name, true, false);
 
 module.exports = (req, res, next) => {
 
