@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
             next();
         }
     } catch(error) {
+        console.log(error);
         if(req.command !== config.general.begin_command){
             res.send(slackResponse(`Must start a planning session with command: \`${config.general.begin_command}\``));
         } else {
