@@ -1,3 +1,5 @@
+import fs from "fs";
+
 module.exports = (req, res, next) => {
     const commands = fs.readdirSync(`${__dirname}/commands`).map(name => name.replace(/(\.js$)/i, '')),
           options = (req.body && req.body.text) ? req.body.text.split(' ') : [];
