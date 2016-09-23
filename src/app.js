@@ -18,7 +18,7 @@ app.use(middlewares.cors);
 
 app.post('/', function(req, res, next) {
     const commands = fs.readdirSync(`${__dirname}/commands`).map(name => name.replace(/(\.js$)/i, ''));
-    const options = (req.body) ? req.body.split(' ') : [];
+    const options = (req.body && req.body.text) ? req.body.text.split(' ') : [];
 
     if (!commands.includes(options[0])) {
         res.send(slackResponse(`Commands supported: \`${commands.join('` `')}\``));
