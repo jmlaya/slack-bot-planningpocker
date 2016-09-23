@@ -21,11 +21,10 @@ app.post('/', function(req, res, next) {
     const options = (req.body && req.body.text) ? req.body.text.split(' ') : [];
 
     if (!commands.includes(options[0])) {
-        res.send(slackResponse(`Commands supported: \`${commands.join('` `')}\``));
+        res.send(slackResponse(`Must provide one of this commands: \`${commands.join('` `')}\``));
     }
 
-    console.log(req.body);
-    res.send(commands);
+    require(`commands/${options[0]}`)(req, res, next, (options[1] ? options[1] : undefined));
 });
 
 app.use(middlewares.errors);
