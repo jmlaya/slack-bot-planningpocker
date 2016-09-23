@@ -15,16 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger);
 
 app.use(middlewares.cors);
+app.use(middlewares.parseMessage);
+app.use(middlewares.validateSession);
 
 app.post('/', function(req, res, next) {
-    const commands = fs.readdirSync(`${__dirname}/commands`).map(name => name.replace(/(\.js$)/i, ''));
-    const options = (req.body && req.body.text) ? req.body.text.split(' ') : [];
-
-    if (!commands.includes(options[0])) {
-        res.send(slackResponse(`Must provide one of this commands: \`${commands.join('` `')}\``));
-    }
-
-    require(`commands/${options[0]}`)(req, res, next, (options[1] ? options[1] : undefined));
+    require(`commands/${req.command}`)(req, res, next, (req.commandParams ? req.commandParams : undefined));
 });
 
 app.use(middlewares.errors);
