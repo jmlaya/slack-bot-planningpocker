@@ -6,6 +6,7 @@ import config from "loaders/config";
 import middlewares from 'loaders/middlewares';
 import logger from "lib/logger";
 import slackResponse from "lib/slack-response";
+import JsonDB from 'node-json-db';
 
 const app = express();
 const router = express.Router();
@@ -17,6 +18,11 @@ app.use(logger);
 app.use(middlewares.cors);
 app.use(middlewares.parseMessage);
 app.use(middlewares.validateSession);
+
+app.get('/', function(req, res){
+    const db = new JsonDB(config.env.db_name, true, false);
+    res.send(db.getData('/'));
+});
 
 app.post('/', function(req, res, next) {
     require(`commands/${req.command}`)(req, res, next, (req.commandParams ? req.commandParams : undefined));
