@@ -1,4 +1,5 @@
 import fs from "fs";
+import slackResponse from "lib/slack-response";
 
 module.exports = (req, res, next) => {
     const commands = fs.readdirSync(`${__dirname}/../commands`).map(name => name.replace(/(\.js$)/i, '')),
