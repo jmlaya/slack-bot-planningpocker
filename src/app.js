@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import config from "loaders/config";
 import middlewares from 'loaders/middlewares';
 import logger from "lib/logger";
-import slackAnswer from "lib/slack-answer";
+import slackResponse from "lib/slack-response";
 
 const app = express();
 const router = express.Router();
@@ -21,7 +21,7 @@ app.post('/', function(req, res, next) {
     const options = (req.body) ? req.body.split(' ') : [];
 
     if (!commands.includes(options[0])) {
-        res.send(slackAnswer(`Commands supported: \`${commands.join('` `')}\``));
+        res.send(slackResponse(`Commands supported: \`${commands.join('` `')}\``));
     }
 
     console.log(req.body);
